@@ -15,14 +15,13 @@ app.get("/random", (req, res) =>{
 })
 
 //2. GET a specific joke
-
 app.get("/jokes/id:", (req, res) =>{
   const id = parseInt(req.params.id) //perseInt trasnforma o id em numero para dps usar a verificação com === 
   const foundJoke = jokes.find((jooke) => joke.id === id)  //Mais sobre o .find  https://www.w3schools.com/jsref/jsref_find.asp
   res.json(foundJoke)
 })
-//3. GET a jokes by filtering on the joke type
 
+//3. GET a jokes by filtering on the joke type
 app.get("/jokes/filter", (req, res) =>{
   const type = req.query.type 
   console.log(type)
@@ -30,8 +29,17 @@ app.get("/jokes/filter", (req, res) =>{
   res.json(filter)
 })
 
-
 //4. POST a new joke
+app.post("/jokes", (req, res)=>{
+  const newJoke = {
+    id: jokes.length +1,
+    jokeText: req.body.text,
+    jokeType: req.body.type
+  }
+  jokes.push(newJoke)
+  console.log(jokes.splice(-1))   //para renderizar na tela a ultima piada criada 
+  res.json(newJoke)
+})
 
 //5. PUT a joke
 
