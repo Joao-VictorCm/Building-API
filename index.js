@@ -56,6 +56,18 @@ app.put("/jokes/:id", (req, res) =>{
 })
 
 //6. PATCH a joke
+app.put("/jokes/:id", (req, res) =>{
+  const id = perseInt(req.params.id)
+  const existingJoke = jokes.find((joke) => joke.id === id)
+  const replaceJoke = {
+    id: id,
+    jokeText: req.body.text  || existingJoke.jokeText,
+    jokeType: req.body.type  || existingJoke.jokeText
+  }
+  const searchIndex = jokes.findIndex((joke) => joke.id === id) //mais sobre o findIndex https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex
+  jokes[searchIndex] = replaceJoke
+  res.json(replaceJoke)
+
 
 //7. DELETE Specific joke
 
