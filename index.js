@@ -42,6 +42,18 @@ app.post("/jokes", (req, res)=>{
 })
 
 //5. PUT a joke
+app.put("/jokes/:id", (req, res) =>{
+  const id = perseInt(req.params.id)
+  const replaceJoke = {
+    id: id,
+    jokeText: req.body.text,
+    jokeType: req.body.type
+  }
+  const searchIndex = jokes.findIndex((joke) => joke.id === id) //mais sobre o findIndex https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex
+  jokes[searchIndex] = replaceJoke
+  res.json(replaceJoke)
+
+})
 
 //6. PATCH a joke
 
