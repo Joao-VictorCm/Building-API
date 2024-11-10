@@ -18,10 +18,18 @@ app.get("/random", (req, res) =>{
 
 app.get("/jokes/id:", (req, res) =>{
   const id = parseInt(req.params.id) //perseInt trasnforma o id em numero para dps usar a verificação com === 
-  const foundJoke = jokes.find((jooke) => joke.id === id)  //Mais sobre o .find https://www.w3schools.com/jsref/jsref_find.asp
+  const foundJoke = jokes.find((jooke) => joke.id === id)  //Mais sobre o .find  https://www.w3schools.com/jsref/jsref_find.asp
   res.json(foundJoke)
 })
 //3. GET a jokes by filtering on the joke type
+
+app.get("/jokes/filter", (req, res) =>{
+  const type = req.query.type 
+  console.log(type)
+  const filter = jokes.filter((jooke) => joke.jokeType === type) 
+  res.json(filter)
+})
+
 
 //4. POST a new joke
 
